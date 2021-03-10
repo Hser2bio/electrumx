@@ -3889,7 +3889,7 @@ class Quebecoin(AuxPowMixin, Coin):
     REORG_LIMIT = 2000
     RPC_PORT = 10890
 
-class CARI(CARI):
+class CARI(coin):
     NAME = "CARI"
     SHORTNAME = "CARI"
     NET = "mainnet"
@@ -3899,8 +3899,8 @@ class CARI(CARI):
     P2PKH_VERBYTE = bytes.fromhex("D")
     P2SH_VERBYTES = [bytes.fromhex("D")]
     WIF_BYTE = bytes.fromhex("2B")
-    TX_COUNT_HEIGHT = 569399
-    TX_COUNT = 2157510
+    TX_COUNT_HEIGHT = 336846
+    TX_COUNT = 670075
     TX_PER_BLOCK = 1
     STATIC_BLOCK_HEADERS = False
     RPC_PORT = 31814
