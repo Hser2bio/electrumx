@@ -3888,3 +3888,32 @@ class Quebecoin(AuxPowMixin, Coin):
     TX_PER_BLOCK = 20
     REORG_LIMIT = 2000
     RPC_PORT = 10890
+
+class CARI(CARI):
+    NAME = "CARI"
+    SHORTNAME = "CARI"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("042F2736")
+    XPRV_VERBYTES = bytes.fromhex("041F352E")
+    GENESIS_HASH = ('000005bd970b7d83eb879472fb48b2c01ed8155d7126ac3e0c201755c0c85c23')
+    P2PKH_VERBYTE = bytes.fromhex("D")
+    P2SH_VERBYTES = [bytes.fromhex("D")]
+    WIF_BYTE = bytes.fromhex("2B")
+    TX_COUNT_HEIGHT = 569399
+    TX_COUNT = 2157510
+    TX_PER_BLOCK = 1
+    STATIC_BLOCK_HEADERS = False
+    RPC_PORT = 31814
+    REORG_LIMIT = 100
+    SESSIONCLS = DashElectrumX
+    DAEMON = daemon.DashDaemon
+
+    @classmethod
+
+    def header_hash(cls, header):
+
+        '''Given a header return the hash.'''
+
+        import quark_hash
+
+        return quark_hash.getPoWHash(header)
