@@ -4044,4 +4044,29 @@ class Myce(Coin):
             return scrypt(header, salt=header, n=1024, r=1, p=1, dklen=32)
         else:
             return double_sha256(header)
-        
+  
+  class reex(Coin):
+
+    NAME = "REEX"
+    SHORTNAME = "REEX"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("3d")
+    P2SH_VERBYTES = [bytes.fromhex("7a")]
+    WIF_BYTE = bytes.fromhex("bd")
+    GENESIS_HASH = (
+        '00000c1b8abb8755561c46ea298cf725c940ca71409f7024bc3ad82fdb1bdc7f')
+    TX_COUNT = 384097
+    TX_COUNT_HEIGHT = 10000
+    TX_PER_BLOCK = 1
+    RPC_PORT = 43211
+    REORG_LIMIT = 100
+    SESSIONCLS = DashElectrumX
+    DAEMON = daemon.DashDaemon
+
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        import quark_hash
+        return quark_hash.getPoWHash(header)      
