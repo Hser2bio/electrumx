@@ -4015,3 +4015,33 @@ class Syscoin(AuxPowMixin, Coin):
     RPC_PORT = 8370
     REORG_LIMIT = 2000
     CHUNK_SIZE = 360
+
+class Myce(Coin):
+    NAME = "Myce"
+    SHORTNAME = "YCE"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("32")
+    P2SH_VERBYTE = bytes.fromhex("55")
+    WIF_BYTE = bytes.fromhex("99")
+    GENESIS_HASH = '0000c74cc66c72cb1a327c5c1d4893ae5276aa50be49fb23cec21df1a2f20d87'
+    RPC_PORT = 23512
+    TX_COUNT = 1568977
+    TX_COUNT_HEIGHT = 774450
+    TX_PER_BLOCK = 3
+    REORG_LIMIT = 100
+    DESERIALIZER = lib_tx.DeserializerSimplicity
+
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        version, = util.unpack_le_uint32_from(header)
+
+        if version < 7:
+            # Requires OpenSSL 1.1.0+
+            from hashlib import scrypt
+            return scrypt(header, salt=header, n=1024, r=1, p=1, dklen=32)
+        else:
+            return double_sha256(header)
+        
